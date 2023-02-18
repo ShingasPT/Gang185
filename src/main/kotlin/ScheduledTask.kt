@@ -42,6 +42,9 @@ class ScheduledTask(private var jda: JDA, private var config: Dotenv) {
             .setDescription("**$freq**")
 
         if (channel != null) {
+
+            channel.deleteMessageById(channel.latestMessageId).queue()
+
             channel.sendMessageEmbeds(embed.build()).queue()
             hasSent = true
         } else {
